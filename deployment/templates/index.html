@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Text 2 Scene</title>
+  <link rel="stylesheet" href="/static/css/main.css">
+  
+  <script src="/static/js/particles.js"></script>
+</head>
+
+<body >
+  
+  <div class="container">
+    <h1>
+      <center>Text To Scene</center>
+    </h1>
+
+    {% block content %}
+    {% for message in form.seed.errors %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    <form method=post>
+
+      {{ form.seed.label }}
+      {{ form.seed }}
+<div>
+      <button  type="submit" class="effect ">Enter</button></div>
+    </form>
+    {% endblock %}
+
+  </div>
+
+<script>
+  particlesJS.load('particles-js', '/static/js/particlesjs-config.json', function() {
+console.log('callback - particles.js config loaded');
+});
+</script>
+<div id="particles-js" ></div>
+</body>
+</html>

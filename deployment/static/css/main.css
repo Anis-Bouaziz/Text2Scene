@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #232741;
+  }
+   
+    
+  .container {
+    text-align: center;
+    background-color: ivory;
+    width: 940px;
+    height: 500px;
+    top:10%;
+    left:25%;
+    border: 1px solid #541388;
+    border-radius: 20px;
+    border-width: 4px;
+    position: absolute;
+    z-index:100;
+    opacity: 0.7;
+    
+  }
+
+  
+   .canv{
+    font-size: 25px;
+    text-align: center;
+     padding: 2%;
+    top:20%;
+    left:20%;
+    right: 20%;
+    border: 1px solid white;
+    border-radius: 20px;
+    border-width: 4px;
+    position: absolute;
+    z-index:100;
+    color: white;
+   }
+   
+
+  h1 { 
+    color: #454e96;
+    display: block;
+    font-size: 48px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+}
+
+  h2 {
+    font-size: 3em;
+    margin-top: 40px;
+    text-align: center;
+    letter-spacing: -2px;
+  }
+   
+  h3 {
+    font-size: 1.7em;
+    font-weight: 100;
+    margin-top: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+    color: #999;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    
+}
+
+li {
+    float: right;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+    text-decoration: none;
+}
+
+form label {
+  
+  color: #454e96;
+  font-size: 26px;
+  font-weight: bold;
+  display: block;
+  padding: 10px 0;
+}
+ 
+
+ 
+form textarea#seed {
+  width: 800px;
+  height: 250px;
+  background-color: #fafafa;
+  border-radius: 3px;
+  border: 1px solid #541388;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 25px;
+}
+ 
+  /* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  
+  right: 0;
+  background-color:rgb(23, 162, 184,0.2); /* Black*/
+  text-align: center;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  margin-top: 0;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.task {
+  
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  vertical-align: middle;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  margin: 0.4rem;
+  height: 4rem;
+  cursor: grab;
+  text-align: center;
+  vertical-align: middle;
+}
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+}
+
+.gu-hide {
+  display: none !important;
+}
+
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+ 
+.effect {
+  text-align: center;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background-color: #541388;
+  text-transform: capitalize;
+  padding: 20px 0px;
+  width: 150px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button :hover{
+cursor: grab;
+}
+
+

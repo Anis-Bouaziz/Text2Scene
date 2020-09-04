@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<header style="position: fixed;">
+    <title>Text 2 Scene
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/particles.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js'></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+        crossorigin="anonymous"></script>
+
+    <ul>
+
+        <li><a href="#" onclick="Nav()">Add Stuff</a></li>
+        <li><a href="/">Home</a></li>
+    </ul>
+</header>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+
+        <div id="add" style=" width: 100px; margin-left: 25%;">
+            <script>var array = [];</script>
+            {%for i in input[1] %}
+            {%if i[1]=='NN'  %}
+            {%if i[2] > 0 %}
+            <script>
+
+                var x = '{{i[0]}}';
+                if (array.indexOf(x) === -1) {
+                    array.push(x)
+                };
+
+            </script>
+            {%endif%}
+            {%endif%}
+            {%endfor%}
+            <script>
+
+                for (i = 0; i < array.length; i++)
+                    document.getElementById('add').innerHTML += '<img src=' + array[i] + ' width="100" class="task">'
+            </script>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center ">
+        <div class="d-flex flex-column mt-3">
+            <div class="p-3 mb-2 bg-info text-white text-align-center"> Situation: {{input[0]|safe}}</div>
+            
+
+        </div>
+    </div>
+    <div class="canv">
+
+
+        {%for i in input[1] %}
+        {%if i[1]=='NN' or i[1]=='NNP' %}
+        {%if i[2] > 0 %}
+
+
+        <div class="parent" id='{{i[0]}}'>
+            {%for j in range(i[2]) %}
+            <img src={{i[0]}} width="100" class="task">
+            {%endfor%}</div>
+        {% else %}
+        <img src={{i[0]}} width="100">
+        {%endif%}
+        {% else %}
+        {%if i[1]!='CD' %}
+        <span>{{i[0]}}</span>
+        {%endif%}
+        {%endif%}
+        {%endfor%}
+
+
+
+    </div>
+    <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark d-flex bd-highlight" id="nav">
+        <img src="/static/images/delete.png" style="width:60px;">
+        <div id="tc" class="p-2 w-100 bd-highlight"></div>
+    </nav>
+    <div id="particles-js"></div>
+</body>
+<script>
+    var draggableElems = Array.prototype.slice.call(document.querySelectorAll('.parent'));
+    draggableElems.push(document.getElementById("add"));
+    draggableElems.push(document.getElementById('tc'));
+
+    var drag = dragula(draggableElems, { revertOnSpill: true })
+        .on('drag', function (el) {
+            el.className = el.className.replace('ex-moved', '');
+
+        }).on('drop', function (el, container, source) {
+            console.log(source)
+            if (container.id == "tc") container.innerHTML = "";
+            if (source.className.includes("parent") && container.className.includes("parent")) drag.cancel();
+            if (source.id == 'add' && container.id != el.src) el.remove()
+
+            if (container.id == "add") drag.cancel();
+            if (source.id == "add" && container.id != 'add') {
+                var tmp = el.cloneNode(el)
+                tmp.className = "task"
+                document.getElementById("add").appendChild(tmp)
+            }
+            el.className += ' ex-moved';
+
+
+        }).on('over', function (el, container) {
+
+            container.className += ' ex-over';
+        }).on('out', function (el, container) {
+
+            container.className = container.className.replace('ex-over', '');
+        });
+    ;
+
+
+</script>
+
+<script>/* Set the width of the side navigation to 250px */
+    function Nav() {
+        if (document.getElementById("mySidenav").style.width == "250px")
+            document.getElementById("mySidenav").style.width = "0"
+        else document.getElementById("mySidenav").style.width = "250px"
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+
+</script>
+<script>
+    particlesJS.load('particles-js', '/static/js/particlesjs-config.json', function () {
+        console.log('callback - particles.js config loaded');
+    });
+</script>
+
+
+</html>
