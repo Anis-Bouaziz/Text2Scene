@@ -1,0 +1,1 @@
+web: waitress-serve --listen=*:8000 deployment.run_server:application

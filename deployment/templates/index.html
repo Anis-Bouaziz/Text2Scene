@@ -4,38 +4,46 @@
 <head>
   <title>Text 2 Scene</title>
   <link rel="stylesheet" href="/static/css/main.css">
-  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
   <script src="/static/js/particles.js"></script>
 </head>
 
-<body >
-  
+<body>
+
   <div class="container">
     <h1>
       <center>Text To Scene</center>
     </h1>
-
-    {% block content %}
-    {% for message in form.seed.errors %}
-    <div class="flash">{{ message }}</div>
-    {% endfor %}
-
     <form method=post>
+      <input type="radio" id="English" name="lang" value="en" checked="checked"><span class="flag-icon flag-icon-us"> </span> English
+      <input  type="radio" id="French" name="lang" value="fr"><span class="flag-icon flag-icon-fr"> </span> French
+      <input type="radio" id="Arabic" name="lang" value="ar"><span class="flag-icon flag-icon-tn"> </span> Arabic
+
+
+      {% block content %}
+      {% for message in form.seed.errors %}
+      <div class="flash">{{ message }}</div>
+      {% endfor %}
+
+
 
       {{ form.seed.label }}
       {{ form.seed }}
-<div>
-      <button  type="submit" class="effect ">Enter</button></div>
+      <div>
+        <button type="submit" class="effect ">Enter</button></div>
     </form>
     {% endblock %}
 
   </div>
 
-<script>
-  particlesJS.load('particles-js', '/static/js/particlesjs-config.json', function() {
-console.log('callback - particles.js config loaded');
-});
-</script>
-<div id="particles-js" ></div>
+  <script>
+    particlesJS.load('particles-js', '/static/js/particlesjs-config.json', function () {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
+  <div id="particles-js"></div>
+
 </body>
+
 </html>

@@ -27,8 +27,8 @@
         <div id="add" style=" width: 100px; margin-left: 25%;">
             <script>var array = [];</script>
             {%for i in input[1] %}
-            {%if i[1]=='NN'  %}
-            {%if i[2] > 0 %}
+            {%if i[1]=='NOUN'  %}
+            {%if i[3] > 0 %}
             <script>
 
                 var x = '{{i[0]}}';
@@ -59,20 +59,20 @@
 
 
         {%for i in input[1] %}
-        {%if i[1]=='NN' or i[1]=='NNP' %}
-        {%if i[2] > 0 %}
+        {%if i[1]=='NOUN' or i[1]=='PROPN' %}
+        {%if i[3] > 0 %}
 
 
         <div class="parent" id='{{i[0]}}'>
-            {%for j in range(i[2]) %}
+            {%for j in range(i[3]) %}
             <img src={{i[0]}} width="100" class="task">
             {%endfor%}</div>
         {% else %}
         <img src={{i[0]}} width="100">
         {%endif%}
         {% else %}
-        {%if i[1]!='CD' %}
-        <span>{{i[0]}}</span>
+        {%if i[1]!='NUM' %}
+        <span>{{i[2]}}</span>
         {%endif%}
         {%endif%}
         {%endfor%}

@@ -2,8 +2,8 @@
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators, SubmitField, DecimalField, IntegerField
 import json
-import analyze_text
-
+import text_analysis
+from waitress import serve
 
 # Create app
 app = Flask(__name__)
@@ -28,7 +28,9 @@ def home():
     if request.method == 'POST' and form.validate():
         # Extract information
         seed = request.form['seed']
-        p=analyze_text.main(seed)
+        lang=request.form['lang']
+        
+        p=text_analysis.main(seed,lang)
         
         return render_template('main.html', input=[seed,p])
         
@@ -38,6 +40,8 @@ def home():
 
 if __name__ == "__main__":
     # Run app
-    app.run(host="0.0.0.0", port=80) 
+    #app.run(host="0.0.0.0", port=80) 
+ 
+    serve(app, host='0.0.0.0', port=8080)
 
 
