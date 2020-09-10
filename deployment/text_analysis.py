@@ -1,9 +1,6 @@
 import stanza
 import requests  
-def main(seed,lang):
-    stanza.download('ar',processors='tokenize,pos,lemma')     # This downloads the English models for the neural pipeline
-    stanza.download('en',processors='tokenize,pos,lemma') 
-    stanza.download('fr',processors='tokenize,pos,lemma') 
+def main(seed,lang): 
     nlp = stanza.Pipeline(str(lang),use_gpu=False,processors='tokenize,pos,lemma') # This sets up a default neural pipeline in English
     #doc = nlp("There were 16 children on the school bus.8 children got off at the first stop.How many children were on the bus then?")
     #doc=nlp("Karima has 3 bananas .")
