@@ -11,3 +11,4 @@ requests==2.24.0
 tqdm==4.48.2
 protobuf==3.13.0
 gunicorn==19.9.0
+jar xf models/en/pretrain/ewt.rar
