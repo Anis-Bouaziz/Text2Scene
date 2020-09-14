@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators, SubmitField, DecimalField, IntegerField
 import json
-import text_analysis
+from text2scene import text_analysis
 from waitress import serve
 
 # Create app
