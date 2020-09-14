@@ -4,7 +4,7 @@ import requests
 
 
 def main(seed, lang):
-    # This sets up a default neural pipeline in lang
+    # This sets up a default neural pipeline in English
     nlp = stanza.Pipeline(str(lang), use_gpu=False,
                           processors='tokenize,pos,lemma')
     #doc = nlp("There were 16 children on the school bus.8 children got off at the first stop.How many children were on the bus then?")
