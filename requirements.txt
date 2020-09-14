@@ -8,4 +8,6 @@ waitress==1.4.4
 quantulum3==0.7.5
 torch==1.3.1+cpu
 requests==2.24.0
+tqdm==4.48.2
+protobuf==3.13.0
 
