@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators, SubmitField, DecimalField, IntegerField
 import json
 from text2scene import text_analysis
-from waitress import serve
+#from waitress import serve
 
 # Create app
 app = Flask(__name__)
@@ -49,7 +49,7 @@ def page_not_found(e):
 if __name__ == "__main__":
     # Run app
     #app.run(host="0.0.0.0", port=80) 
- 
-    serve(app, host='0.0.0.0', port=8000)
+    app.run()
+    #serve(app, host='0.0.0.0', port=8000)
 
 
