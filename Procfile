@@ -1,1 +1,1 @@
-web: waitress-serve --listen=*:8000 text2scene_app:app
+web: waitress-serve --listen=*:process.env.PORT text2scene_app:app
