@@ -5,4 +5,5 @@ pandas==0.23.0
 wtforms==2.3.3
 Jinja2==2.11.2
 waitress==1.4.4
+quantulum3==0.7.5
 

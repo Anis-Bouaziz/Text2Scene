@@ -2,13 +2,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #232741;
+    background-color: #8782d9;
+    
   }
    
     
   .container {
     text-align: center;
-    background-color: ivory;
+    
     width: 940px;
     height: 500px;
     top:10%;
@@ -18,27 +19,42 @@ body {
     border-width: 4px;
     position: absolute;
     z-index:100;
-    opacity: 0.7;
+    
     
   }
 
   
    .canv{
     font-size: 25px;
-    text-align: center;
-     padding: 2%;
+    
+     
     top:20%;
     left:20%;
     right: 20%;
-    border: 1px solid white;
-    border-radius: 20px;
-    border-width: 4px;
+    user-select: none;
     position: absolute;
     z-index:100;
     color: white;
    }
+     
+   .canvas{
+     
+    
+    position: absolute;
+    
+    z-index: -1;
+    
+   }
    
+  .toolbar{
+      padding: 1em;
+     
 
+  }
+
+.tool{
+  margin: 1em;
+}
   h1 { 
     color: #454e96;
     display: block;

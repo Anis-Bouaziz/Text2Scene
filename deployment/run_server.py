@@ -37,11 +37,19 @@ def home():
     # Send template information to index.html
     return render_template('index.html', form=form)
 
+@app.errorhandler(500)
+def server_error(e):
+    form = ReusableForm(request.form)
+    return render_template('index.html', form=form), 500
+@app.errorhandler(404)
+def page_not_found(e):
+    form = ReusableForm(request.form)
+    return render_template('index.html', form=form), 404
 
 if __name__ == "__main__":
     # Run app
-    #app.run(host="0.0.0.0", port=80) 
+    app.run(host="0.0.0.0", port=80) 
  
-    serve(app, host='0.0.0.0', port=8080)
+    #serve(app, host='0.0.0.0', port=8080)
 
 
