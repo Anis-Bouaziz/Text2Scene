@@ -1,46 +1,93 @@
 import stanza
-import requests  
-def main(seed,lang): 
-    nlp = stanza.Pipeline(str(lang),use_gpu=False,processors='tokenize,pos,lemma') # This sets up a default neural pipeline in English
+from quantulum3 import parser
+import requests
+
+
+def main(seed, lang):
+    # This sets up a default neural pipeline in English
+    nlp = stanza.Pipeline(str(lang), use_gpu=False,
+                          processors='tokenize,pos,lemma')
     #doc = nlp("There were 16 children on the school bus.8 children got off at the first stop.How many children were on the bus then?")
     #doc=nlp("Karima has 3 bananas .")
     #doc=nlp("Il y avait 16 enfants dans le bus scolaire. 8 enfants sont descendus au premier arrêt. Combien d'enfants étaient dans le bus?")
     #doc=nlp("كان هناك 16 طفلاً في حافلة المدرسة. نزل 8 أطفال في المحطة الأولى. كم عدد الأطفال الذين كانوا في الحافلة؟")
     #print(*[f'word: {word.text+" "}\tlemma: {word.lemma}\txpos: {word.upos}' for sent in doc.sentences for word in sent.words], sep='\n')
-    doc=nlp(seed)
-    res=[]
-    for sent in doc.sentences :
-        for word in sent.words:
-            res.append([word.lemma,word.upos,word.text])
+    doc = nlp(seed)
+    res = {'type': None, 'data': []}
+    for sent in doc.sentences:
+        if lang != 'en':
+            response = requests.get(
+                'https://api.mymemory.translated.net/get?q='+sent.text+'&langpair='+lang+'|en')
+            translated_text = response.json()['responseData']['translatedText']
+            
+        else:
+            translated_text = sent.text
 
-    i=0
-    for w in res:
+        quants = parser.parse(translated_text)
+        for q in quants:
+            if q.unit.name != 'dimensionless' and q.unit.name != 'turn':
+                
+                res['data'].append([float(q.surface.split()[0]), q.surface.split()[1]])
+    if len(res['data']) > 0:
+        if len(res['data'])==1:
+            if 'diameter' in translated_text:
+                res['type'] = 'diametre'
+            elif 'radius' in translated_text:
+                res['type'] = 'radius'
+            else:
+                res['type'] = 'square'
+        else:
+            res['type'] = 'rectangle'
+        print(res)
+        return res
+
+
+    else:
+        res['type'] = 'entity'
+
+    for sent in doc.sentences:
+        for word in sent.words:
+            res['data'].append([word.lemma, word.upos, word.text])
+
+    i = 0
+    for w in res['data']:
         w.append(i)
-        i=0
-        if w[1]=='NUM':
-            i= int(w[0])
-    for i,w in enumerate(res):
-        if w[1]=='NOUN':
-            if i<len(res)-1 :
-                if res[i+1][1]=='NOUN':
-                    w[0]=w[0]+' '+res[i+1][0]
-                    w[2]=w[2]+' '+res[i+1][2]
-                    del res[i+1]
-    for w in res:
-            if w[1]=='NOUN':
-                url = "https://api.giphy.com/v1/stickers/search?api_key=iidRVNv0y0mmMUNhYrwlVFufRdIeFLJP&q="+w[0]+"&limit=1&offset=1"
-                response = requests.get(url)
-                w[0]=response.json()['data'][0]['images']['downsized']['url']
-            if w[1]=='PROPN' or w[1]=='X':
-                r2=requests.get("https://api.genderize.io?name="+w[0])
-                gender=r2.json()['gender']
-                if gender=='female':
-                    w[0]='https://media.giphy.com/media/ifMNaJBQEJPDuUxF6n/giphy.gif'
-                else :
-                    w[0]='https://media.giphy.com/media/TiC9sYLY9nilNnwMLq/giphy.gif'   
-    
+        i = 0
+        if w[1] == 'NUM':
+            i = int(w[0])
+    for i, w in enumerate(res['data']):
+        if w[1] == 'NOUN':
+            if i < len(res['data'])-1:
+                if res['data'][i+1][1] == 'NOUN':
+                    w[0] = w[0]+' '+res['data'][i+1][0]
+                    w[2] = w[2]+' '+res['data'][i+1][2]
+                    del res['data'][i+1]
+    for w in res['data']:
+        if w[1] == 'NOUN':
+            if lang != 'en':
+                response = requests.get(
+                    'https://api.mymemory.translated.net/get?q='+w[0]+'&langpair='+lang+'|en')
+                translated_word = response.json(
+                )['responseData']['translatedText']
+            else:
+                translated_word = w[0]
+
+            url = "https://api.giphy.com/v1/stickers/search?api_key=iidRVNv0y0mmMUNhYrwlVFufRdIeFLJP&q=" + \
+                translated_word+"&limit=1&offset=1"
+            response = requests.get(url)
+            if (response.json()['data']):
+                w[0] = response.json()['data'][0]['images']['downsized']['url']
+            else:w[1]='NOUN_'
+        if w[1] == 'PROPN' or w[1] == 'X':
+            r2 = requests.get("https://api.genderize.io?name="+w[0])
+            gender = r2.json()['gender']
+            if gender == 'female':
+                w[0] = 'https://media.giphy.com/media/ifMNaJBQEJPDuUxF6n/giphy.gif'
+            else:
+                w[0] = 'https://media.giphy.com/media/TiC9sYLY9nilNnwMLq/giphy.gif'
+    print(res)
     return res
 
 
-
-
+#main("Anis has a recangle with a length of 10 metres and a width of 5 metres .","en")
+#main("anis has 10 apples.","en")
