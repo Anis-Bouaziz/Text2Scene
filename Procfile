@@ -1,1 +1,1 @@
-web: waitress-serve --listen=*:8000 deployment.text2scene:application
+web: waitress-serve --listen=*:8000 text2scene.text2scene:application

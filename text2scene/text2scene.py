@@ -2,12 +2,12 @@
 from flask import Flask, render_template, request
 from wtforms import Form, TextAreaField, validators, SubmitField, DecimalField, IntegerField
 import json
-from text2scene import  text_analysis
+import  text_analysis
 from waitress import serve
 
 # Create app
 app = Flask(__name__)
-print(app)
+
 
 
 class ReusableForm(Form):
