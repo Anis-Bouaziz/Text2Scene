@@ -1,4 +1,4 @@
-import stanza
+from text2scene.stanza import stanza
 from quantulum3 import parser
 import requests
 
