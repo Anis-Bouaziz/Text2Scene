@@ -5,15 +5,19 @@ import requests
 
 def main(seed, lang):
     # This sets up a default neural pipeline in Lang
+    if ',' in seed:
+        seed=seed.replace(',',' , ')
     nlp = stanza.Pipeline(str(lang), use_gpu=False,
                           processors='tokenize,pos,lemma')
     doc = nlp(seed)
     res = {'type': None, 'data': []}
     for sent in doc.sentences:
         if lang != 'en':
+            temp=sent.text.replace(',','and')
             response = requests.get(
-                'https://api.mymemory.translated.net/get?q='+sent.text+'&langpair='+lang+'|en')
+                'https://api.mymemory.translated.net/get?q='+temp+'&langpair='+lang+'|en')
             translated_text = response.json()['responseData']['translatedText']
+            print(translated_text)
             
         else:
             translated_text = sent.text
