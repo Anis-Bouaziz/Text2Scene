@@ -87,6 +87,7 @@ def main(seed, lang):
             else:
                 w[0] = 'https://media.giphy.com/media/TiC9sYLY9nilNnwMLq/giphy.gif'
     print(res)
+    del doc
     return res
 
 
