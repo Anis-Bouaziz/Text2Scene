@@ -24,8 +24,10 @@ def main(seed, lang):
             translated_text = sent.text
 
         quants = parser.parse(translated_text)
+        
         for q in quants:
-            if q.unit.name != 'dimensionless' and q.unit.name != 'turn':
+            
+            if q.unit.entity.name == 'length' :
                 
                 res['data'].append([float(q.surface.split()[0]), q.surface.split()[1]])
     if len(res['data']) > 0:
@@ -73,7 +75,7 @@ def main(seed, lang):
                 translated_word = w[0]
 
             url = "https://api.giphy.com/v1/stickers/search?api_key=iidRVNv0y0mmMUNhYrwlVFufRdIeFLJP&q=" + \
-                translated_word+"&limit=1&offset=1"
+                translated_word+"&limit=1&offset=1&rating=PG"
             response = requests.get(url)
             if (response.json()['data']):
                 w[0] = response.json()['data'][0]['images']['downsized']['url']
