@@ -4,3 +4,4 @@ __pycache__/
 *$py.class
 *.vscode/
 #/models
+models/en/pretrain/ewt.pt
