@@ -4,14 +4,9 @@ import requests
 
 
 def main(seed, lang):
-    # This sets up a default neural pipeline in English
+    # This sets up a default neural pipeline in Lang
     nlp = stanza.Pipeline(str(lang), use_gpu=False,
                           processors='tokenize,pos,lemma')
-    #doc = nlp("There were 16 children on the school bus.8 children got off at the first stop.How many children were on the bus then?")
-    #doc=nlp("Karima has 3 bananas .")
-    #doc=nlp("Il y avait 16 enfants dans le bus scolaire. 8 enfants sont descendus au premier arrêt. Combien d'enfants étaient dans le bus?")
-    #doc=nlp("كان هناك 16 طفلاً في حافلة المدرسة. نزل 8 أطفال في المحطة الأولى. كم عدد الأطفال الذين كانوا في الحافلة؟")
-    #print(*[f'word: {word.text+" "}\tlemma: {word.lemma}\txpos: {word.upos}' for sent in doc.sentences for word in sent.words], sep='\n')
     doc = nlp(seed)
     res = {'type': None, 'data': []}
     for sent in doc.sentences:
@@ -91,5 +86,8 @@ def main(seed, lang):
     return res
 
 
-#main("Anis has a recangle with a length of 10 metres and a width of 5 metres .","en")
-#main("anis has 10 apples.","en")
+#doc = nlp("There were 16 children on the school bus.8 children got off at the first stop.How many children were on the bus then?")
+#doc=nlp("Karima has 3 bananas .")
+#doc=nlp("Il y avait 16 enfants dans le bus scolaire. 8 enfants sont descendus au premier arrêt. Combien d'enfants étaient dans le bus?")
+#doc=nlp("كان هناك 16 طفلاً في حافلة المدرسة. نزل 8 أطفال في المحطة الأولى. كم عدد الأطفال الذين كانوا في الحافلة؟")
+#print(*[f'word: {word.text+" "}\tlemma: {word.lemma}\txpos: {word.upos}' for sent in doc.sentences for word in sent.words], sep='\n')
