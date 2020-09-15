@@ -1,1 +1,2 @@
 models/en/pretrain/ewt.pt filter=lfs diff=lfs merge=lfs -text
+models/fr/pretrain/gsd.pt filter=lfs diff=lfs merge=lfs -text
