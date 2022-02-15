@@ -1,6 +1,6 @@
 -f https://download.pytorch.org/whl/torch_stable.html
 Flask==1.0.2
-numpy==1.14.3
+numpy==1.21.0
 pandas==0.23.0
 wtforms==2.3.3
 Jinja2==2.11.3
