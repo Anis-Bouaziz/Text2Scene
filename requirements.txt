@@ -1,5 +1,5 @@
 -f https://download.pytorch.org/whl/torch_stable.html
-Flask==1.0.2
+Flask==2.2.5
 numpy==1.22.0
 pandas==0.23.0
 wtforms==2.3.3
